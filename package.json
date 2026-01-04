@@ -1,0 +1,61 @@
+{
+  "name": "@asafarim/react-dropdowns",
+  "version": "1.0.0",
+  "description": "Comprehensive reusable dropdown components for React with TypeScript and mobile-first design",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "demo": "cd demo && pnpm start",
+    "demo:build": "cd demo && pnpm run build",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "dropdown",
+    "typescript",
+    "components",
+    "ui",
+    "mobile-first",
+    "asafarim"
+  ],
+  "author": "ASafariM",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AliSafari-IT/react-dropdowns.git"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^29.0.0",
+    "rollup": "^4.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@asafarim/design-tokens": "^0.5.0"
+  }
+}
