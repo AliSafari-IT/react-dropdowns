@@ -18,8 +18,8 @@ export const DropdownTrigger = React.forwardRef<HTMLElement, DropdownTriggerProp
 
   // Check if children is already a button element
   const isButtonChild = React.isValidElement(children) && 
-    (children.type === 'button' || 
-     (typeof children.type === 'string' && children.type === 'button'));
+    typeof children.type === 'string' && 
+    children.type === 'button';
 
   if (isButtonChild) {
     // Clone the button and add our props

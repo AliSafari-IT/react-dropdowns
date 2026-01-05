@@ -4,21 +4,38 @@ interface UseClickOutsideProps {
   ref: RefObject<HTMLDivElement>;
   handler: () => void;
   enabled?: boolean;
+  excludeRefs?: RefObject<HTMLElement>[];
 }
 
-export const useClickOutside = ({ ref, handler, enabled = true }: UseClickOutsideProps) => {
+export const useClickOutside = ({ ref, handler, enabled = true, excludeRefs = [] }: UseClickOutsideProps) => {
   useEffect(() => {
     if (!enabled) return;
 
     const handleMouseDown = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        handler();
+      const target = event.target as Node;
+      
+      if (ref.current && !ref.current.contains(target)) {
+        const isInExcludedRef = excludeRefs.some(
+          excludeRef => excludeRef.current && excludeRef.current.contains(target)
+        );
+        
+        if (!isInExcludedRef) {
+          handler();
+        }
       }
     };
 
     const handleTouchStart = (event: TouchEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        handler();
+      const target = event.target as Node;
+      
+      if (ref.current && !ref.current.contains(target)) {
+        const isInExcludedRef = excludeRefs.some(
+          excludeRef => excludeRef.current && excludeRef.current.contains(target)
+        );
+        
+        if (!isInExcludedRef) {
+          handler();
+        }
       }
     };
 
@@ -30,5 +47,5 @@ export const useClickOutside = ({ ref, handler, enabled = true }: UseClickOutsid
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('touchstart', handleTouchStart);
     };
-  }, [ref, handler, enabled]);
+  }, [ref, handler, enabled, excludeRefs]);
 };

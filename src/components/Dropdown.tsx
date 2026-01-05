@@ -70,7 +70,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
   useClickOutside({
     ref: containerRef,
     handler: handleClose,
-    enabled: isOpen
+    enabled: isOpen,
+    excludeRefs: [menuRef]
   });
 
   // Keyboard navigation
@@ -93,6 +94,47 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
+  // Check if children is a button element to avoid nested buttons
+  const isButtonChild = React.isValidElement(children) && 
+    typeof children.type === 'string' && 
+    children.type === 'button';
+
+  const triggerChildren = isButtonChild
+    ? showChevron
+      ? React.cloneElement(children as React.ReactElement<any>, {
+          children: (
+            <>
+              {(children as any).props.children}
+              <svg 
+                width="12" 
+                height="12" 
+                viewBox="0 0 12 12" 
+                fill="currentColor"
+                style={{ marginLeft: 'var(--asm-space-1)' }}
+              >
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+            </>
+          )
+        })
+      : children
+    : (
+      <>
+        {children}
+        {showChevron && (
+          <svg 
+            width="12" 
+            height="12" 
+            viewBox="0 0 12 12" 
+            fill="currentColor"
+            style={{ marginLeft: 'var(--asm-space-1)' }}
+          >
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          </svg>
+        )}
+      </>
+    );
+
   return (
     <div 
       ref={containerRef}
@@ -107,18 +149,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         variant={variant}
         size={size}
       >
-        {children}
-        {showChevron && (
-          <svg 
-            width="12" 
-            height="12" 
-            viewBox="0 0 12 12" 
-            fill="currentColor"
-            style={{ marginLeft: 'var(--asm-space-1)' }}
-          >
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-          </svg>
-        )}
+        {triggerChildren}
       </DropdownTrigger>
 
       {isOpen && createPortal(
