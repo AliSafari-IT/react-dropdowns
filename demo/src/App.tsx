@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   ChevronDown, 
   Settings, 
@@ -6,11 +6,8 @@ import {
   LogOut, 
   Edit, 
   Trash2, 
-  Plus, 
   Filter, 
   MoreHorizontal,
-  Sun,
-  Moon,
   Check,
   X,
   Download,
@@ -23,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Dropdown } from '@asafarim/react-dropdowns';
 import { ThemeToggle } from '@asafarim/react-themes';
+import { PackageLinks } from '@asafarim/shared';
 
 function App() {
   const [selectedFilter, setSelectedFilter] = useState('All');
@@ -31,9 +29,9 @@ function App() {
   return (
     <div className="demo-container">
       {/* Theme Toggle */}
-      <div className="demo-theme-toggle">
-        <ThemeToggle size="sm" />
-      </div>
+      <nav className="demo-theme-toggle">
+        <ThemeToggle size="sm" variant='outline'/>
+      </nav>
 
       {/* Header */}
       <header className="demo-header">
@@ -42,8 +40,13 @@ function App() {
           Comprehensive, accessible, and mobile-first dropdown components for React
         </p>
       </header>
-
-      {/* Basic Usage */}
+      <div style={{ marginTop: "3rem" }}>
+        <PackageLinks
+          packageName="@asafarim/react-dropdowns"
+          githubPath="https://github.com/AliSafari-IT/react-dropdowns"
+          demoPath="https://alisafari-it.github.io/react-dropdowns/"
+        />
+      </div>      {/* Basic Usage */}
       <section className="demo-section">
         <h2 className="demo-section-title">Basic Usage</h2>
         <p className="demo-section-description">

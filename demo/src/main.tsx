@@ -1,6 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import '@asafarim/design-tokens/css';
+import ReactDOM from 'react-dom/client';
+
+/* Import design tokens */
+//import '@asafarim/design-tokens/css';
 
 import App from './App.tsx'
 import './index.css'
