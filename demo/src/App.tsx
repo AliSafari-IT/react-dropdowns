@@ -14,7 +14,9 @@ import {
   Archive,
   Star,
   Heart,
-  Bookmark
+  Bookmark,
+  Copy as CopyIcon,
+  Check as CheckIcon
 } from 'lucide-react';
 import { Dropdown } from '@asafarim/react-dropdowns';
 import { ThemeToggle } from '@asafarim/react-themes';
@@ -23,6 +25,20 @@ import { PackageLinks } from '@asafarim/shared';
 function App() {
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [selectedUser, setSelectedUser] = useState('John Doe');
+  const [showModal, setShowModal] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const installCommands = [
+    'npm install @asafarim/react-dropdowns',
+    'yarn add @asafarim/react-dropdowns',
+    'pnpm add @asafarim/react-dropdowns'
+  ];
+
+  const handleCopy = (text: string, index: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 2000);
+  };
 
   return (
     <div className="demo-container">
@@ -44,7 +60,151 @@ function App() {
           githubPath="https://github.com/AliSafari-IT/react-dropdowns"
           demoPath="https://alisafari-it.github.io/react-dropdowns/"
         />
-      </div>      {/* Basic Usage */}
+      </div>
+
+      {/* Get Started CTA */}
+      <div className="demo-cta-section">
+        <div className="demo-cta-content">
+          <h2 className="demo-cta-title">🚀 Get Started in Seconds</h2>
+          <p className="demo-cta-description">
+            Install the package and start building beautiful dropdowns with our comprehensive guide
+          </p>
+          <button 
+            className="demo-cta-button"
+            onClick={() => setShowModal(true)}
+          >
+            <Download className="demo-cta-icon" />
+            Installation & Quick Start
+            <ChevronDown className="demo-cta-chevron" />
+          </button>
+        </div>
+      </div>
+
+      {/* Installation & Quick Start Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowModal(false)}>
+              <X size={24} />
+            </button>
+
+            <div className="modal-header">
+              <h2 className="modal-title">Get Started</h2>
+              <p className="modal-subtitle">Installation & Quick Start Guide</p>
+            </div>
+
+            <div className="modal-body">
+              {/* Installation Section */}
+              <div className="modal-section">
+                <h3 className="modal-section-title">📦 Installation</h3>
+                <p className="modal-section-description">
+                  Choose your preferred package manager to install the library.
+                </p>
+                <div className="install-commands">
+                  {installCommands.map((cmd, idx) => (
+                    <div key={idx} className="install-command">
+                      <code className="command-text">{cmd}</code>
+                      <button
+                        className="copy-button"
+                        onClick={() => handleCopy(cmd, idx)}
+                        title="Copy to clipboard"
+                      >
+                        {copiedIndex === idx ? (
+                          <>
+                            <CheckIcon size={16} />
+                            <span>Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <CopyIcon size={16} />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Start Section */}
+              <div className="modal-section">
+                <h3 className="modal-section-title">⚡ Quick Start</h3>
+                <p className="modal-section-description">
+                  Get up and running in just a few lines of code.
+                </p>
+                <div className="quick-start-code">
+                  <pre><code>{`import { Dropdown } from '@asafarim/react-dropdowns';
+
+function App() {
+  return (
+    <Dropdown
+      items={[
+        {
+          id: 'edit',
+          label: 'Edit',
+          onClick: () => console.log('Edit')
+        },
+        {
+          id: 'delete',
+          label: 'Delete',
+          danger: true,
+          onClick: () => console.log('Delete')
+        }
+      ]}
+      placement="bottom-start"
+    >
+      <button>Actions</button>
+    </Dropdown>
+  );
+}`}</code></pre>
+                </div>
+              </div>
+
+              {/* Features Section */}
+              <div className="modal-section">
+                <h3 className="modal-section-title">✨ Key Features</h3>
+                <div className="features-grid">
+                  <div className="feature-item">
+                    <span className="feature-icon">🎯</span>
+                    <span className="feature-text">Comprehensive</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">♿</span>
+                    <span className="feature-text">Accessible</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">📱</span>
+                    <span className="feature-text">Mobile-First</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">🎨</span>
+                    <span className="feature-text">Themeable</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">🔧</span>
+                    <span className="feature-text">TypeScript</span>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">⚡</span>
+                    <span className="feature-text">Performant</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button className="modal-button-secondary" onClick={() => setShowModal(false)}>
+                Close
+              </button>
+              <button className="modal-button-primary" onClick={() => setShowModal(false)}>
+                Explore Demo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Basic Usage */}
       <section className="demo-section">
         <h2 className="demo-section-title">Basic Usage</h2>
         <p className="demo-section-description">
@@ -719,6 +879,144 @@ function App() {
                   Disabled
                   <ChevronDown className="demo-icon" />
                 </button>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="demo-section">
+        <h2 className="demo-section-title">Real-World Use Cases</h2>
+        <p className="demo-section-description">
+          Practical examples of how to implement dropdowns in common application scenarios.
+        </p>
+
+        <div className="demo-grid">
+          <div className="demo-card">
+            <h3 className="demo-card-title">Navigation Menu</h3>
+            <p className="demo-card-description">
+              Main navigation with category selection.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'home', label: 'Home', onClick: () => alert('Navigate to Home') },
+                  { id: 'about', label: 'About', onClick: () => alert('Navigate to About') },
+                  { id: 'services', label: 'Services', onClick: () => alert('Navigate to Services') },
+                  {
+                    divider: true,
+                    label: 'Divider'
+                  },
+                  { id: 'contact', label: 'Contact', onClick: () => alert('Navigate to Contact') }
+                ]}
+                placement="bottom-start"
+                variant="outline"
+              >
+                Menu
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Bulk Actions</h3>
+            <p className="demo-card-description">
+              Actions for selected items in a list.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'archive', label: 'Archive', icon: <Archive className="demo-icon" />, onClick: () => alert('Archived') },
+                  { id: 'delete', label: 'Delete', icon: <Trash2 className="demo-icon" />, danger: true, onClick: () => alert('Deleted') },
+                  { divider: true , label: 'Divider' },
+                  { id: 'export', label: 'Export', icon: <Download className="demo-icon" />, onClick: () => alert('Exported') }
+                ]}
+                placement="bottom-start"
+                variant="secondary"
+              >
+                Actions
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Sort & Filter</h3>
+            <p className="demo-card-description">
+              Sorting options for data tables.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'newest', label: 'Newest First', onClick: () => alert('Sorted by newest') },
+                  { id: 'oldest', label: 'Oldest First', onClick: () => alert('Sorted by oldest') },
+                  { divider: true, label: 'Divider' },
+                  { id: 'name-asc', label: 'Name (A-Z)', onClick: () => alert('Sorted by name') },
+                  { id: 'name-desc', label: 'Name (Z-A)', onClick: () => alert('Sorted by name desc') }
+                ]}
+                placement="bottom-start"
+              >
+                Sort By
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Theme Switcher</h3>
+            <p className="demo-card-description">
+              Select application theme or language.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'light', label: 'Light Theme', onClick: () => alert('Light theme selected') },
+                  { id: 'dark', label: 'Dark Theme', onClick: () => alert('Dark theme selected') },
+                  { id: 'auto', label: 'Auto (System)', onClick: () => alert('Auto theme selected') }
+                ]}
+                placement="bottom-start"
+                variant="ghost"
+              >
+                Theme
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Notification Settings</h3>
+            <p className="demo-card-description">
+              Configure notification preferences.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'all', label: 'All Notifications', onClick: () => alert('All enabled') },
+                  { id: 'important', label: 'Important Only', onClick: () => alert('Important only') },
+                  { id: 'none', label: 'Mute All', onClick: () => alert('Muted') }
+                ]}
+                placement="bottom-start"
+                variant="outline"
+              >
+                Notifications
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Export Format</h3>
+            <p className="demo-card-description">
+              Choose export file format.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: 'pdf', label: 'PDF', onClick: () => alert('Exporting as PDF') },
+                  { id: 'csv', label: 'CSV', onClick: () => alert('Exporting as CSV') },
+                  { id: 'xlsx', label: 'Excel', onClick: () => alert('Exporting as Excel') },
+                  { id: 'json', label: 'JSON', onClick: () => alert('Exporting as JSON') }
+                ]}
+                placement="bottom-start"
+                variant="success"
+              >
+                Export
               </Dropdown>
             </div>
           </div>

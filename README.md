@@ -384,7 +384,52 @@ The demo showcases:
 
 MIT © ASafariM
 
+## Button Variants
+
+The dropdown trigger supports multiple button style variants:
+
+- `primary` - Default primary button style
+- `secondary` - Secondary button with border
+- `success` - Green success button
+- `warning` - Orange warning button
+- `danger` - Red destructive button
+- `info` - Cyan info button
+- `ghost` - Transparent ghost button
+- `outline` - Outlined button
+- `link` - Text link style
+- `brand` - Brand-specific color
+
+```tsx
+<Dropdown variant="secondary" items={items}>
+  <button>Secondary Dropdown</button>
+</Dropdown>
+```
+
+## Chevron Icon
+
+The dropdown automatically adds a chevron icon to the trigger button. You can disable it with the `showChevron` prop:
+
+```tsx
+<Dropdown showChevron={false} items={items}>
+  <button>No Chevron</button>
+</Dropdown>
+```
+
 ## Changelog
+
+### 1.1.1
+
+- Added automatic chevron icon to dropdown triggers
+- Added `showChevron` prop to control chevron visibility
+- Fixed Vite base path configuration for GitHub Pages deployment
+- Improved demo app layout with grid-based examples
+- Added support for multiple button variants in trigger
+
+### 1.1.0
+
+- Enhanced demo app with variant examples
+- Improved styling and layout
+- Better mobile responsiveness
 
 ### 1.0.0
 

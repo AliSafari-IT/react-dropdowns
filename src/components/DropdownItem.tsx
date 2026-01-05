@@ -3,7 +3,7 @@ import { DropdownItemProps } from '../types';
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({
   children,
-  label,
+  label = '',
   icon,
   disabled = false,
   danger = false,
