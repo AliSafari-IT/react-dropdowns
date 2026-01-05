@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const { execSync } = require('child_process');
-const readline = require('readline');
+import fs from 'fs';
+import { execSync } from 'child_process';
+import readline from 'readline';
 
 // Create readline interface for user input
 const rl = readline.createInterface({
@@ -55,73 +55,75 @@ function continueRelease() {
 }
 
 // Run commands
-try {
-  execSync('npm run build', { stdio: 'inherit' });
-  
-  // Check if tag already exists
-  let tagExists = false;
+(async () => {
   try {
-    execSync(`git rev-parse v${version}`, { stdio: 'pipe' });
-    tagExists = true;
-  } catch (checkError) {
-    tagExists = false;
-  }
-  
-  if (tagExists) {
-    console.log(`⚠️  Tag v${version} already exists. Release already published!`);
-    console.log('');
-    console.log('Do you want to update the package version automatically or manually?');
-    console.log('(A/a for automatically, M/m for manually)');
+    execSync('npm run build', { stdio: 'inherit' });
     
-    rl.question('Enter your choice: ', (answer) => {
-      const choice = answer.trim().toLowerCase();
+    // Check if tag already exists
+    let tagExists = false;
+    try {
+      execSync(`git rev-parse v${version}`, { stdio: 'pipe' });
+      tagExists = true;
+    } catch (checkError) {
+      tagExists = false;
+    }
+    
+    if (tagExists) {
+      console.log(`⚠️  Tag v${version} already exists. Release already published!`);
+      console.log('');
+      console.log('Do you want to update the package version automatically or manually?');
+      console.log('(A/a for automatically, M/m for manually)');
       
-      if (choice === 'a') {
-        // Automatic version bump
-        const newVersion = bumpVersion(version);
-        console.log(`🔄 Bumping version from ${version} to ${newVersion}...`);
+      rl.question('Enter your choice: ', (answer) => {
+        const choice = answer.trim().toLowerCase();
         
-        // Update package.json
-        packageJson.version = newVersion;
-        fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2) + '\n');
-        
-        console.log(`✅ Updated package.json to version ${newVersion}`);
-        version = newVersion;
-        
-        // Continue with the release process
-        continueRelease();
-        
-      } else if (choice === 'm') {
-        // Manual version update instructions
-        console.log('');
-        console.log('📝 To update the version manually:');
-        console.log('1. Open package.json');
-        console.log('2. Update the "version" field to a new version number');
-        console.log('3. Save the file and run this script again');
-        console.log('');
-        console.log('Press any key to exit...');
-        
-        rl.question('', () => {
+        if (choice === 'a') {
+          // Automatic version bump
+          const newVersion = bumpVersion(version);
+          console.log(`🔄 Bumping version from ${version} to ${newVersion}...`);
+          
+          // Update package.json
+          packageJson.version = newVersion;
+          fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2) + '\n');
+          
+          console.log(`✅ Updated package.json to version ${newVersion}`);
+          version = newVersion;
+          
+          // Continue with the release process
+          continueRelease();
+          
+        } else if (choice === 'm') {
+          // Manual version update instructions
+          console.log('');
+          console.log('📝 To update the version manually:');
+          console.log('1. Open package.json');
+          console.log('2. Update the "version" field to a new version number');
+          console.log('3. Save the file and run this script again');
+          console.log('');
+          console.log('Press any key to exit...');
+          
+          rl.question('', () => {
+            rl.close();
+            process.exit(0);
+          });
+          
+        } else {
+          console.log('❌ Invalid choice. Please run the script again.');
           rl.close();
-          process.exit(0);
-        });
-        
-      } else {
-        console.log('❌ Invalid choice. Please run the script again.');
-        rl.close();
-        process.exit(1);
-      }
-    });
+          process.exit(1);
+        }
+      });
+      
+      // Don't continue yet, wait for user input
+      return;
+    }
     
-    // Don't continue yet, wait for user input
-    return;
+    // If tag doesn't exist, continue with normal release
+    continueRelease();
+    
+  } catch (error) {
+    console.error('❌ Release failed:', error.message);
+    rl.close();
+    process.exit(1);
   }
-  
-  // If tag doesn't exist, continue with normal release
-  continueRelease();
-  
-} catch (error) {
-  console.error('❌ Release failed:', error.message);
-  rl.close();
-  process.exit(1);
-}
+})();
