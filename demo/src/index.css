@@ -3,6 +3,7 @@
 
 /* Import dropdown styles using relative path */
 @import '../../dist/index.css';
+
 /* Reset and base styles */
 * {
   box-sizing: border-box;
