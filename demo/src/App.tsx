@@ -128,35 +128,140 @@ function App() {
 
               {/* Quick Start Section */}
               <div className="modal-section">
-                <h3 className="modal-section-title">⚡ Quick Start</h3>
+                <h3 className="modal-section-title">⚡ Quick Start Examples</h3>
                 <p className="modal-section-description">
-                  Get up and running in just a few lines of code.
+                  Real-world examples showing different use cases and features.
                 </p>
-                <div className="quick-start-code">
-                  <pre><code>{`import { Dropdown } from '@asafarim/react-dropdowns';
+                
+                {/* Example 1: Basic Actions Menu */}
+                <div style={{ marginBottom: 'var(--asm-space-6)' }}>
+                  <h4 style={{ fontSize: 'var(--asm-font-size-sm)', fontWeight: 'var(--asm-font-weight-600)', marginBottom: 'var(--asm-space-2)', color: 'var(--asm-color-text)' }}>
+                    1. Basic Actions Menu
+                  </h4>
+                  <div className="quick-start-code">
+                    <pre><code>{`import { Dropdown } from '@asafarim/react-dropdowns';
+import { Edit, Trash2 } from 'lucide-react';
 
-function App() {
-  return (
-    <Dropdown
-      items={[
-        {
-          id: 'edit',
-          label: 'Edit',
-          onClick: () => console.log('Edit')
-        },
-        {
-          id: 'delete',
-          label: 'Delete',
-          danger: true,
-          onClick: () => console.log('Delete')
-        }
-      ]}
-      placement="bottom-start"
-    >
-      <button>Actions</button>
-    </Dropdown>
-  );
-}`}</code></pre>
+<Dropdown
+  items={[
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <Edit />,
+      onClick: () => alert('Edit clicked')
+    },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <Trash2 />,
+      danger: true,
+      onClick: () => alert('Delete clicked')
+    }
+  ]}
+  placement="bottom-start"
+>
+  Actions
+</Dropdown>`}</code></pre>
+                  </div>
+                  <div style={{ marginTop: 'var(--asm-space-3)', padding: 'var(--asm-space-3)', background: 'var(--asm-color-surface-muted)', borderRadius: 'var(--asm-radius-md)', border: '1px solid var(--asm-color-border)' }}>
+                    <p style={{ fontSize: 'var(--asm-font-size-xs)', color: 'var(--asm-color-text-muted)', margin: '0 0 var(--asm-space-2) 0' }}>Live Preview:</p>
+                    <Dropdown
+                      items={[
+                        {
+                          id: 'edit',
+                          label: 'Edit',
+                          icon: <Edit className="demo-icon" />,
+                          onClick: () => alert('Edit clicked')
+                        },
+                        {
+                          id: 'delete',
+                          label: 'Delete',
+                          icon: <Trash2 className="demo-icon" />,
+                          danger: true,
+                          onClick: () => alert('Delete clicked')
+                        }
+                      ]}
+                      placement="bottom-start"
+                    >
+                      Actions
+                    </Dropdown>
+                  </div>
+                </div>
+
+                {/* Example 2: User Selector with State */}
+                <div style={{ marginBottom: 'var(--asm-space-6)' }}>
+                  <h4 style={{ fontSize: 'var(--asm-font-size-sm)', fontWeight: 'var(--asm-font-weight-600)', marginBottom: 'var(--asm-space-2)', color: 'var(--asm-color-text)' }}>
+                    2. Stateful User Selector
+                  </h4>
+                  <div className="quick-start-code">
+                    <pre><code>{`const [selectedUser, setSelectedUser] = useState('John Doe');
+
+<Dropdown
+  items={[
+    { id: 'john', label: 'John Doe', onClick: () => setSelectedUser('John Doe') },
+    { id: 'jane', label: 'Jane Smith', onClick: () => setSelectedUser('Jane Smith') },
+    { id: 'bob', label: 'Bob Johnson', onClick: () => setSelectedUser('Bob Johnson') }
+  ]}
+  variant="outline"
+  showChevron={false}
+>
+  <User size={16} />
+  {selectedUser}
+  <ChevronDown size={16} />
+</Dropdown>`}</code></pre>
+                  </div>
+                  <div style={{ marginTop: 'var(--asm-space-3)', padding: 'var(--asm-space-3)', background: 'var(--asm-color-surface-muted)', borderRadius: 'var(--asm-radius-md)', border: '1px solid var(--asm-color-border)' }}>
+                    <p style={{ fontSize: 'var(--asm-font-size-xs)', color: 'var(--asm-color-text-muted)', margin: '0 0 var(--asm-space-2) 0' }}>Live Preview:</p>
+                    <Dropdown
+                      items={[
+                        { id: 'john', label: 'John Doe', onClick: () => setSelectedUser('John Doe') },
+                        { id: 'jane', label: 'Jane Smith', onClick: () => setSelectedUser('Jane Smith') },
+                        { id: 'bob', label: 'Bob Johnson', onClick: () => setSelectedUser('Bob Johnson') }
+                      ]}
+                      variant="outline"
+                      showChevron={false}
+                    >
+                      <User size={16} />
+                      {selectedUser}
+                      <ChevronDown size={16} />
+                    </Dropdown>
+                  </div>
+                </div>
+
+                {/* Example 3: Context Menu */}
+                <div>
+                  <h4 style={{ fontSize: 'var(--asm-font-size-sm)', fontWeight: 'var(--asm-font-weight-600)', marginBottom: 'var(--asm-space-2)', color: 'var(--asm-color-text)' }}>
+                    3. Context Menu with Variants
+                  </h4>
+                  <div className="quick-start-code">
+                    <pre><code>{`<Dropdown
+  items={[
+    { id: 'share', label: 'Share', icon: <Share /> },
+    { id: 'copy', label: 'Copy Link', icon: <Copy /> },
+    { type: 'divider' },
+    { id: 'archive', label: 'Archive', icon: <Archive /> }
+  ]}
+  variant="ghost"
+  size="sm"
+>
+  <MoreHorizontal size={20} />
+</Dropdown>`}</code></pre>
+                  </div>
+                  <div style={{ marginTop: 'var(--asm-space-3)', padding: 'var(--asm-space-3)', background: 'var(--asm-color-surface-muted)', borderRadius: 'var(--asm-radius-md)', border: '1px solid var(--asm-color-border)' }}>
+                    <p style={{ fontSize: 'var(--asm-font-size-xs)', color: 'var(--asm-color-text-muted)', margin: '0 0 var(--asm-space-2) 0' }}>Live Preview:</p>
+                    <Dropdown
+                      items={[
+                        { id: 'share', label: 'Share', icon: <Share className="demo-icon" /> },
+                        { id: 'copy', label: 'Copy Link', icon: <Copy className="demo-icon" /> },
+                        { divider: true, label: 'Divider' },
+                        { id: 'archive', label: 'Archive', icon: <Archive className="demo-icon" /> }
+                      ]}
+                      variant="ghost"
+                      size="sm"
+                    >
+                      <MoreHorizontal size={20} />
+                    </Dropdown>
+                  </div>
                 </div>
               </div>
 
@@ -238,7 +343,6 @@ function App() {
                 showChevron={true}
               >
                 Actions
-
               </Dropdown>
             </div>
           </div>
