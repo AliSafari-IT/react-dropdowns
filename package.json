@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/react-dropdowns",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "type": "module",
   "description": "Comprehensive reusable dropdown components for React with TypeScript and mobile-first design",
   "main": "dist/index.js",
@@ -30,10 +30,12 @@
       "require": "./dist/index.js"
     },
     "./styles": {
-      "import": "./dist/index.css"
+      "import": "./dist/index.css",
+      "types": "./dist/index.d.ts"
     },
     "./css": {
-      "import": "./dist/index.css"
+      "import": "./dist/index.css",
+      "types": "./dist/index.d.ts"
     }
   },
   "keywords": [
