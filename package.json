@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/react-dropdowns",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Comprehensive reusable dropdown components for React with TypeScript and mobile-first design",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -21,6 +21,18 @@
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -d demo/dist",
     "release": "node scripts/release.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
+    "./styles": {
+      "import": "./dist/index.css"
+    },
+    "./css": {
+      "import": "./dist/index.css"
+    }
   },
   "keywords": [
     "react",
