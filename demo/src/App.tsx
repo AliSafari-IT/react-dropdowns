@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { 
-  ChevronDown, 
-  Settings, 
-  User, 
-  LogOut, 
-  Edit, 
-  Trash2, 
-  Filter, 
+import {
+  ChevronDown,
+  Settings,
+  User,
+  LogOut,
+  Edit,
+  Trash2,
+  Filter,
   MoreHorizontal,
   Check,
   X,
@@ -30,7 +30,7 @@ function App() {
     <div className="demo-container">
       {/* Theme Toggle */}
       <nav className="demo-theme-toggle">
-        <ThemeToggle size="sm" variant='outline'/>
+        <ThemeToggle size="sm" variant='outline' />
       </nav>
 
       {/* Header */}
@@ -52,7 +52,7 @@ function App() {
         <p className="demo-section-description">
           Simple dropdown menus with various trigger styles and placements.
         </p>
-        
+
         <div className="demo-grid">
           <div className="demo-card">
             <h3 className="demo-card-title">Default Dropdown</h3>
@@ -77,17 +77,16 @@ function App() {
                   }
                 ]}
                 placement="bottom-start"
+                showChevron={true}
               >
-                <button className="demo-button">
-                  Actions
-                  <ChevronDown className="demo-icon" />
-                </button>
+                Actions
+
               </Dropdown>
             </div>
           </div>
 
           <div className="demo-card">
-            <h3 className="demo-card-title">Secondary Style</h3>
+            <h3 className="demo-card-title">Variant Dropdowns</h3>
             <p className="demo-card-description">
               Dropdown with secondary button styling.
             </p>
@@ -95,32 +94,110 @@ function App() {
               <Dropdown
                 items={[
                   {
-                    id: 'profile',
-                    label: 'Profile',
-                    icon: <User className="demo-icon" />,
-                    onClick: () => alert('Profile clicked')
+                    id: 'copy',
+                    label: 'Copy',
+                    icon: <Copy className="demo-icon" />,
+                    onClick: () => alert('Copy clicked')
                   },
                   {
-                    id: 'settings',
-                    label: 'Settings',
-                    icon: <Settings className="demo-icon" />,
-                    onClick: () => alert('Settings clicked')
+                    id: 'download',
+                    label: 'Download',
+                    icon: <Download className="demo-icon" />,
+                    onClick: () => alert('Download clicked')
                   },
-                  { divider: true, label: 'Divider' },
                   {
-                    id: 'logout',
-                    label: 'Logout',
-                    icon: <LogOut className="demo-icon" />,
-                    danger: true,
-                    onClick: () => alert('Logout clicked')
+                    id: 'share',
+                    label: 'Share',
+                    icon: <Share className="demo-icon" />,
+                    onClick: () => alert('Share clicked')
                   }
                 ]}
-                placement="bottom-end"
+                placement="bottom"
+                showChevron={true}
+                variant='secondary'
               >
-                <button className="demo-button demo-button--secondary">
-                  Menu
-                  <ChevronDown className="demo-icon" />
-                </button>
+                More Actions
+              </Dropdown>
+              <Dropdown
+                items={[
+                  {
+                    id: 'copy',
+                    label: 'Copy',
+                    icon: <Copy className="demo-icon" />,
+                    onClick: () => alert('Copy clicked')
+                  },
+                  {
+                    id: 'download',
+                    label: 'Download',
+                    icon: <Download className="demo-icon" />,
+                    onClick: () => alert('Download clicked')
+                  },
+                  {
+                    id: 'share',
+                    label: 'Share',
+                    icon: <Share className="demo-icon" />,
+                    onClick: () => alert('Share clicked')
+                  }
+                ]}
+                placement="bottom"
+                showChevron={true}
+                variant='ghost'
+              >
+                More Actions
+              </Dropdown>
+              <Dropdown
+                items={[
+                  {
+                    id: 'copy',
+                    label: 'Copy',
+                    icon: <Copy className="demo-icon" />,
+                    onClick: () => alert('Copy clicked')
+                  },
+                  {
+                    id: 'download',
+                    label: 'Download',
+                    icon: <Download className="demo-icon" />,
+                    onClick: () => alert('Download clicked')
+                  },
+                  {
+                    id: 'share',
+                    label: 'Share',
+                    icon: <Share className="demo-icon" />,
+                    onClick: () => alert('Share clicked')
+                  }
+                ]}
+                placement="bottom"
+                showChevron={true}
+                variant='link'
+              >
+                More Actions
+              </Dropdown>
+              <Dropdown
+                items={[
+                  {
+                    id: 'copy',
+                    label: 'Copy',
+                    icon: <Copy className="demo-icon" />,
+                    onClick: () => alert('Copy clicked')
+                  },
+                  {
+                    id: 'download',
+                    label: 'Download',
+                    icon: <Download className="demo-icon" />,
+                    onClick: () => alert('Download clicked')
+                  },
+                  {
+                    id: 'share',
+                    label: 'Share',
+                    icon: <Share className="demo-icon" />,
+                    onClick: () => alert('Share clicked')
+                  }
+                ]}
+                placement="bottom"
+                showChevron={true}
+                variant='danger'
+              >
+                More Actions
               </Dropdown>
             </div>
           </div>
@@ -153,11 +230,11 @@ function App() {
                   }
                 ]}
                 placement="bottom"
+                showChevron={false}
               >
-                <button className="demo-button demo-button--ghost">
-                  <MoreHorizontal className="demo-icon" />
-                </button>
+                <MoreHorizontal className="demo-icon" />
               </Dropdown>
+
             </div>
           </div>
         </div>
@@ -169,7 +246,7 @@ function App() {
         <p className="demo-section-description">
           Dropdowns can be positioned in various directions relative to the trigger.
         </p>
-        
+
         <div className="demo-grid">
           <div className="demo-card">
             <h3 className="demo-card-title">Top Placement</h3>
@@ -179,16 +256,14 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Option 1', onClick: () => {} },
-                  { id: '2', label: 'Option 2', onClick: () => {} },
-                  { id: '3', label: 'Option 3', onClick: () => {} }
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } },
+                  { id: '3', label: 'Option 3', onClick: () => { } }
                 ]}
                 placement="top"
+                showChevron={true}
               >
-                <button className="demo-button">
-                  Top
-                  <ChevronDown className="demo-icon" />
-                </button>
+                Top
               </Dropdown>
             </div>
           </div>
@@ -201,16 +276,14 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Option 1', onClick: () => {} },
-                  { id: '2', label: 'Option 2', onClick: () => {} },
-                  { id: '3', label: 'Option 3', onClick: () => {} }
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } },
+                  { id: '3', label: 'Option 3', onClick: () => { } }
                 ]}
                 placement="left"
+                showChevron={true}
               >
-                <button className="demo-button">
-                  Left
-                  <ChevronDown className="demo-icon" />
-                </button>
+                Left
               </Dropdown>
             </div>
           </div>
@@ -223,16 +296,14 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Option 1', onClick: () => {} },
-                  { id: '2', label: 'Option 2', onClick: () => {} },
-                  { id: '3', label: 'Option 3', onClick: () => {} }
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } },
+                  { id: '3', label: 'Option 3', onClick: () => { } }
                 ]}
                 placement="right"
+                showChevron={true}
               >
-                <button className="demo-button">
-                  Right
-                  <ChevronDown className="demo-icon" />
-                </button>
+                Right
               </Dropdown>
             </div>
           </div>
@@ -245,7 +316,7 @@ function App() {
         <p className="demo-section-description">
           Real-world examples showing how dropdowns can be used in applications.
         </p>
-        
+
         <div className="demo-grid">
           <div className="demo-card">
             <h3 className="demo-card-title">Filter Dropdown</h3>
@@ -275,12 +346,10 @@ function App() {
                   }
                 ]}
                 placement="bottom-start"
+                showChevron={true}
               >
-                <button className="demo-button demo-button--secondary">
-                  <Filter className="demo-icon" />
-                  {selectedFilter}
-                  <ChevronDown className="demo-icon" />
-                </button>
+                <Filter className="demo-icon" />
+                {selectedFilter}
               </Dropdown>
               <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
                 Selected: {selectedFilter}
@@ -316,12 +385,10 @@ function App() {
                   }
                 ]}
                 placement="bottom-start"
+                showChevron={true}
               >
-                <button className="demo-button demo-button--secondary">
-                  <User className="demo-icon" />
-                  {selectedUser}
-                  <ChevronDown className="demo-icon" />
-                </button>
+                <User className="demo-icon" />
+                {selectedUser}
               </Dropdown>
               <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
                 Assigned to: {selectedUser}
@@ -371,11 +438,210 @@ function App() {
                   }
                 ]}
                 placement="bottom-end"
+                showChevron={false}
               >
-                <button className="demo-button">
-                  More Actions
-                  <MoreHorizontal className="demo-icon" />
-                </button>
+                More Actions
+                <MoreHorizontal className="demo-icon" />
+              </Dropdown>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Button Variants */}
+      <section className="demo-section">
+        <h2 className="demo-section-title">Button Variants</h2>
+        <p className="demo-section-description">
+          Dropdown triggers with different button style variants using ASafariM design tokens.
+        </p>
+
+        <div className="demo-grid">
+          <div className="demo-card">
+            <h3 className="demo-card-title">Primary Variant</h3>
+            <p className="demo-card-description">
+              Default primary button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="primary"
+                placement="bottom-start"
+              >
+                Primary
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Secondary Variant</h3>
+            <p className="demo-card-description">
+              Secondary button style with border.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="secondary"
+                placement="bottom-start"
+              >
+                Secondary
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Success Variant</h3>
+            <p className="demo-card-description">
+              Green success button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="success"
+                placement="bottom-start"
+              >
+                Success
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Warning Variant</h3>
+            <p className="demo-card-description">
+              Orange warning button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="warning"
+                placement="bottom-start"
+              >
+                Warning
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Danger Variant</h3>
+            <p className="demo-card-description">
+              Red danger/destructive button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="danger"
+                placement="bottom-start"
+              >
+                Danger
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Info Variant</h3>
+            <p className="demo-card-description">
+              Cyan info button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="info"
+                placement="bottom-start"
+              >
+                Info
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Ghost Variant</h3>
+            <p className="demo-card-description">
+              Transparent ghost button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="ghost"
+                placement="bottom-start"
+              >
+                Ghost
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Outline Variant</h3>
+            <p className="demo-card-description">
+              Outlined button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="outline"
+                placement="bottom-start"
+              >
+                Outline
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Link Variant</h3>
+            <p className="demo-card-description">
+              Text link button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="link"
+                placement="bottom-start"
+              >
+                Link Style
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Brand Variant</h3>
+            <p className="demo-card-description">
+              Brand-specific button style.
+            </p>
+            <div className="demo-example">
+              <Dropdown
+                items={[
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
+                ]}
+                variant="brand"
+                placement="bottom-start"
+              >
+                Brand
               </Dropdown>
             </div>
           </div>
@@ -388,7 +654,7 @@ function App() {
         <p className="demo-section-description">
           Different sizes and states for various use cases.
         </p>
-        
+
         <div className="demo-grid">
           <div className="demo-card">
             <h3 className="demo-card-title">Small Size</h3>
@@ -398,11 +664,12 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Small Option 1', onClick: () => {} },
-                  { id: '2', label: 'Small Option 2', onClick: () => {} }
+                  { id: '1', label: 'Small Option 1', onClick: () => { } },
+                  { id: '2', label: 'Small Option 2', onClick: () => { } }
                 ]}
                 size="sm"
                 placement="bottom-start"
+                showChevron={false}
               >
                 <button className="demo-button" style={{ fontSize: '0.75rem', padding: '0.375rem 0.75rem' }}>
                   Small
@@ -420,11 +687,12 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Large Option 1', onClick: () => {} },
-                  { id: '2', label: 'Large Option 2', onClick: () => {} }
+                  { id: '1', label: 'Large Option 1', onClick: () => { } },
+                  { id: '2', label: 'Large Option 2', onClick: () => { } }
                 ]}
                 size="lg"
                 placement="bottom-start"
+                showChevron={false}
               >
                 <button className="demo-button" style={{ fontSize: '1rem', padding: '0.75rem 1.5rem' }}>
                   Large
@@ -442,11 +710,12 @@ function App() {
             <div className="demo-example">
               <Dropdown
                 items={[
-                  { id: '1', label: 'Option 1', onClick: () => {} },
-                  { id: '2', label: 'Option 2', onClick: () => {} }
+                  { id: '1', label: 'Option 1', onClick: () => { } },
+                  { id: '2', label: 'Option 2', onClick: () => { } }
                 ]}
                 disabled={true}
                 placement="bottom-start"
+                showChevron={false}
               >
                 <button className="demo-button" disabled style={{ opacity: 0.6, cursor: 'not-allowed' }}>
                   Disabled
@@ -464,7 +733,7 @@ function App() {
         <p className="demo-section-description">
           The dropdown components are optimized for mobile devices with larger touch targets and responsive behavior.
         </p>
-        
+
         <div className="demo-card">
           <h3 className="demo-card-title">Mobile-Friendly Features</h3>
           <ul style={{ color: 'var(--color-text-muted)', lineHeight: 1.6 }}>

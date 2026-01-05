@@ -104,10 +104,9 @@ body {
 }
 
 .demo-example {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: var(--asm-space-4);
-  align-items: flex-start;
 }
 
 .demo-button {

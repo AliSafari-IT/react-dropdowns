@@ -29,7 +29,8 @@ export default {
     }),
     postcss({
       extract: true,
-      minimize: true
+      minimize: true,
+      modules: true
     })
   ],
   external: ['react', 'react-dom']

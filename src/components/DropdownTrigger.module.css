@@ -1,0 +1,204 @@
+@import "@asafarim/design-tokens/css/index.css";
+
+.trigger {
+  font-family: var(--asm-font-family-primary);
+  font-size: var(--asm-font-size-md);
+  font-weight: var(--asm-font-weight-500);
+  border: none;
+  border-radius: var(--asm-radius-md);
+  cursor: pointer;
+  transition: all var(--asm-motion-duration-normal) var(--asm-motion-easing-standard);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--asm-space-2);
+  white-space: nowrap;
+}
+
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--asm-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Size variants */
+.sm {
+  padding: calc(var(--asm-space-control-padding-y) * 0.75) calc(var(--asm-space-control-padding-x) * 0.75);
+  font-size: var(--asm-font-size-sm);
+}
+
+.md {
+  padding: var(--asm-space-control-padding-y) var(--asm-space-control-padding-x);
+  font-size: var(--asm-font-size-md);
+}
+
+.lg {
+  padding: calc(var(--asm-space-control-padding-y) * 1.25) calc(var(--asm-space-control-padding-x) * 1.25);
+  font-size: var(--asm-font-size-lg);
+}
+
+/* Primary variant */
+.primary {
+  background-color: var(--asm-color-button-primary-bg);
+  color: var(--asm-color-button-primary-text);
+  border: 1px solid transparent;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--asm-color-button-primary-bg-hover);
+}
+
+.primary:active:not(:disabled) {
+  background-color: var(--asm-color-button-primary-bg-active);
+}
+
+/* Secondary variant */
+.secondary {
+  background-color: var(--asm-color-button-secondary-bg);
+  color: var(--asm-color-button-secondary-text);
+  border: 1px solid var(--asm-color-border);
+}
+
+.secondary:hover:not(:disabled) {
+  border-color: var(--asm-color-text);
+  background-color: var(--asm-color-surface-muted);
+}
+
+.secondary:active:not(:disabled) {
+  background-color: var(--asm-color-surface-muted);
+}
+
+/* Success variant */
+.success {
+  background-color: var(--asm-color-success-400);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.success:hover:not(:disabled) {
+  background-color: var(--asm-color-success-500);
+}
+
+.success:active:not(:disabled) {
+  background-color: var(--asm-color-success-600);
+}
+
+/* Warning variant */
+.warning {
+  background-color: var(--asm-color-warning-400);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.warning:hover:not(:disabled) {
+  background-color: var(--asm-color-warning-500);
+}
+
+.warning:active:not(:disabled) {
+  background-color: var(--asm-color-warning-600);
+}
+
+/* Danger variant */
+.danger {
+  background-color: var(--asm-color-button-destructive-bg);
+  color: var(--asm-color-button-destructive-text);
+  border: 1px solid transparent;
+}
+
+.danger:hover:not(:disabled) {
+  background-color: var(--asm-color-danger-500);
+}
+
+.danger:active:not(:disabled) {
+  background-color: var(--asm-color-danger-600);
+}
+
+/* Info variant */
+.info {
+  background-color: var(--asm-color-info-400);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.info:hover:not(:disabled) {
+  background-color: var(--asm-color-info-500);
+}
+
+.info:active:not(:disabled) {
+  background-color: var(--asm-color-info-600);
+}
+
+/* Ghost variant */
+.ghost {
+  background-color: transparent;
+  color: var(--asm-color-text);
+  border: 1px solid transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--asm-color-button-ghost-bg-hover);
+}
+
+.ghost:active:not(:disabled) {
+  background-color: var(--asm-color-button-ghost-bg-hover);
+}
+
+/* Outline variant */
+.outline {
+  background-color: transparent;
+  color: var(--asm-color-text);
+  border: 1px solid var(--asm-color-border);
+}
+
+.outline:hover:not(:disabled) {
+  border-color: var(--asm-color-text);
+  background-color: var(--asm-color-surface-muted);
+}
+
+.outline:active:not(:disabled) {
+  background-color: var(--asm-color-surface-muted);
+}
+
+/* Link variant */
+.link {
+  background-color: transparent;
+  color: var(--asm-color-primary-500);
+  border: none;
+  text-decoration: none;
+  padding: 0;
+}
+
+.link:hover:not(:disabled) {
+  text-decoration: underline;
+  color: var(--asm-color-primary-600);
+}
+
+.link:active:not(:disabled) {
+  color: var(--asm-color-primary-700);
+}
+
+/* Brand variant */
+.brand {
+  background-color: var(--asm-color-brand-primary-500);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.brand:hover:not(:disabled) {
+  background-color: var(--asm-color-brand-primary-600);
+}
+
+.brand:active:not(:disabled) {
+  background-color: var(--asm-color-brand-primary-700);
+}
+
+/* Disabled state */
+.trigger:disabled {
+  background-color: var(--asm-color-button-disabled-bg);
+  color: var(--asm-color-button-disabled-text);
+  border-color: transparent;
+}

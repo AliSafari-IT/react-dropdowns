@@ -7,7 +7,17 @@ export type DropdownPlacement =
   | 'right' | 'right-start' | 'right-end';
 
 export type DropdownSize = 'sm' | 'md' | 'lg';
-export type DropdownVariant = 'default' | 'ghost' | 'outline';
+export type DropdownVariant = 
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'ghost'
+  | 'outline'
+  | 'link'
+  | 'brand';
 
 export interface DropdownPosition {
   top?: number;
@@ -38,6 +48,7 @@ export interface DropdownProps {
   variant?: DropdownVariant;
   disabled?: boolean;
   closeOnSelect?: boolean;
+  showChevron?: boolean;
   className?: string;
   'data-testid'?: string;
 }
@@ -68,6 +79,8 @@ export interface DropdownTriggerProps {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
+  variant?: DropdownVariant;
+  size?: DropdownSize;
   className?: string;
   'data-testid'?: string;
 }
