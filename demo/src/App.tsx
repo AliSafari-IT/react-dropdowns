@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import {
   ChevronDown,
-  Settings,
   User,
-  LogOut,
   Edit,
   Trash2,
   Filter,
