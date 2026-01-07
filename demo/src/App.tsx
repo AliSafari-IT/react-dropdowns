@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import {
   ChevronDown,
   User,
@@ -18,9 +19,89 @@ import {
   Copy as CopyIcon,
   Check as CheckIcon
 } from 'lucide-react';
-import { Dropdown } from '@asafarim/react-dropdowns';
+import { Dropdown, DropdownItem, DropdownMenu, useDropdown, useClickOutside } from '@asafarim/react-dropdowns';
 import { ThemeToggle } from '@asafarim/react-themes';
 import { PackageLinks } from '@asafarim/shared';
+
+function AdvancedDropdownExample() {
+  const { isOpen, position, toggle, triggerRef, menuRef, close } = useDropdown();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  useClickOutside({
+    ref: containerRef,
+    handler: close,
+    enabled: isOpen,
+    excludeRefs: [menuRef]
+  });
+
+  return (
+    <div ref={containerRef}>
+      <div
+        ref={triggerRef}
+        onClick={toggle}
+        style={{
+          padding: 'var(--asm-space-4)',
+          background: 'var(--asm-color-surface)',
+          border: '2px solid var(--asm-color-border)',
+          borderRadius: 'var(--asm-radius-md)',
+          cursor: 'pointer',
+          transition: 'all var(--asm-motion-duration-normal) var(--asm-motion-easing-standard)',
+          transform: isOpen ? 'scale(0.98)' : 'scale(1)',
+          boxShadow: isOpen ? 'var(--asm-effect-shadow-md)' : 'var(--asm-effect-shadow-sm)'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--asm-space-2)' }}>
+          <MoreHorizontal size={18} style={{ color: 'var(--asm-color-text-muted)' }} />
+          <span style={{ fontSize: 'var(--asm-font-size-sm)', fontWeight: 'var(--asm-font-weight-500)', color: 'var(--asm-color-text)' }}>
+            {isOpen ? 'Menu Open' : 'Click to Open'}
+          </span>
+          <ChevronDown
+            size={16}
+            style={{
+              marginLeft: 'auto',
+              transition: 'transform var(--asm-motion-duration-normal) var(--asm-motion-easing-standard)',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              color: 'var(--asm-color-text-muted)'
+            }}
+          />
+        </div>
+      </div>
+
+      {isOpen && createPortal(
+        <DropdownMenu
+          ref={menuRef}
+          isOpen={isOpen}
+          position={position}
+          size="md"
+        >
+          <DropdownItem
+            label="Edit Item"
+            icon={<Edit className="demo-icon" />}
+            onClick={() => alert('Edit clicked')}
+          />
+          <DropdownItem
+            label="Duplicate"
+            icon={<Copy className="demo-icon" />}
+            onClick={() => alert('Duplicated')}
+          />
+          <DropdownItem
+            label="Share"
+            icon={<Share className="demo-icon" />}
+            onClick={() => alert('Shared')}
+          />
+          <div style={{ borderTop: '1px solid var(--asm-color-border)', margin: 'var(--asm-space-1) 0' }} />
+          <DropdownItem
+            label="Delete"
+            icon={<Trash2 className="demo-icon" />}
+            danger
+            onClick={() => alert('Deleted')}
+          />
+        </DropdownMenu>,
+        document.body
+      )}
+    </div>
+  );
+}
 
 function App() {
   const [selectedFilter, setSelectedFilter] = useState('All');
@@ -69,7 +150,7 @@ function App() {
           <p className="demo-cta-description">
             Install the package and start building beautiful dropdowns with our comprehensive guide
           </p>
-          <button 
+          <button
             className="demo-cta-button"
             onClick={() => setShowModal(true)}
           >
@@ -79,6 +160,8 @@ function App() {
           </button>
         </div>
       </div>
+
+
 
       {/* Installation & Quick Start Modal */}
       {showModal && (
@@ -132,7 +215,7 @@ function App() {
                 <p className="modal-section-description">
                   Real-world examples showing different use cases and features.
                 </p>
-                
+
                 {/* Example 1: Basic Actions Menu */}
                 <div style={{ marginBottom: 'var(--asm-space-6)' }}>
                   <h4 style={{ fontSize: 'var(--asm-font-size-sm)', fontWeight: 'var(--asm-font-weight-600)', marginBottom: 'var(--asm-space-2)', color: 'var(--asm-color-text)' }}>
@@ -1032,7 +1115,7 @@ import { Edit, Trash2 } from 'lucide-react';
                 items={[
                   { id: 'archive', label: 'Archive', icon: <Archive className="demo-icon" />, onClick: () => alert('Archived') },
                   { id: 'delete', label: 'Delete', icon: <Trash2 className="demo-icon" />, danger: true, onClick: () => alert('Deleted') },
-                  { divider: true , label: 'Divider' },
+                  { divider: true, label: 'Divider' },
                   { id: 'export', label: 'Export', icon: <Download className="demo-icon" />, onClick: () => alert('Exported') }
                 ]}
                 placement="bottom-start"
@@ -1122,6 +1205,76 @@ import { Edit, Trash2 } from 'lucide-react';
               >
                 Export
               </Dropdown>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Advanced: useDropdown Hook */}
+      <section className="demo-section">
+        <h2 className="demo-section-title">Advanced: Custom Trigger with useDropdown</h2>
+        <p className="demo-section-description">
+          Build custom dropdown experiences using the <code style={{ background: 'var(--asm-color-surface-muted)', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontFamily: 'var(--asm-font-family-mono)', fontSize: '0.875rem' }}>useDropdown</code> hook and <code style={{ background: 'var(--asm-color-surface-muted)', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontFamily: 'var(--asm-font-family-mono)', fontSize: '0.875rem' }}>DropdownMenu</code> component for full control over positioning and styling.
+        </p>
+
+        <div className="demo-grid">
+          <div className="demo-card">
+            <h3 className="demo-card-title">Custom Card Trigger</h3>
+            <p className="demo-card-description">
+              A styled card that opens a dropdown menu on click.
+            </p>
+            <div className="demo-example">
+              <AdvancedDropdownExample />
+            </div>
+          </div>
+
+          <div className="demo-card">
+            <h3 className="demo-card-title">Code Example</h3>
+            <p className="demo-card-description">
+              Implementation details and hook usage.
+            </p>
+            <div className="demo-code" style={{ fontSize: '0.75rem', lineHeight: '1.4', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+{`const { isOpen, position, toggle, triggerRef, menuRef } = useDropdown();
+
+return (
+  <>
+    <div
+      ref={triggerRef}
+      onClick={toggle}
+      style={{
+        padding: 'var(--asm-space-4)',
+        background: 'var(--asm-color-surface)',
+        border: '1px solid var(--asm-color-border)',
+        borderRadius: 'var(--asm-radius-md)',
+        cursor: 'pointer'
+      }}
+    >
+      <p>Click to open menu</p>
+    </div>
+
+    {isOpen && createPortal(
+      <DropdownMenu
+        ref={menuRef}
+        isOpen={isOpen}
+        position={position}
+        size="md"
+      >
+        <DropdownItem
+          label="Edit"
+          icon={<Edit />}
+          onClick={() => {}}
+        />
+        <DropdownItem
+          label="Delete"
+          icon={<Trash2 />}
+          danger
+          onClick={() => {}}
+        />
+      </DropdownMenu>,
+      document.body
+    )}
+  </>
+);`}
             </div>
           </div>
         </div>
